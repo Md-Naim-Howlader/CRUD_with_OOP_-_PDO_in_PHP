@@ -1,0 +1,22 @@
+# Enable Rewrite Engine
+
+RewriteEngine On
+
+# Prevent Access to Specific Folders
+
+RewriteRule ^(admin|config|database|private|inc|backup) - [F,L]
+
+# Prevent Direct Access to PHP Files in Specific Folders
+
+RewriteRule ^(inc|config|database)/.\*\.php$ - [F,L]
+
+# Deny Access to .htaccess, .env, and Other Sensitive Files
+
+<FilesMatch "(\.htaccess|\.env|\.sql|\.ini|\.log|\.sh|\.bak|\.json|\.xml)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+
+# Prevent Directory Listing
+
+Options -Indexes
